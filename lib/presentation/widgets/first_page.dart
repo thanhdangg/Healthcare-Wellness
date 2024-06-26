@@ -46,7 +46,7 @@ Widget buildLogoFrame() {
 Widget buildLoadingFrame(double progressValue) {
   return Container(
     decoration: const BoxDecoration(
-      color: AppColors.backgroundColorFirstPage,
+      color: AppColors.backgroundColorSplashScreen,
     ),
     child: Center(
       child: Column(
@@ -54,7 +54,8 @@ Widget buildLoadingFrame(double progressValue) {
         children: [
           const Text(
             'Loading',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+            style: TextStyle(
+                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           SizedBox(height: 20),
           Padding(
@@ -66,8 +67,8 @@ Widget buildLoadingFrame(double progressValue) {
               valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
               minHeight: 10,
             ),
-            ),
-        ],    
+          ),
+        ],
       ),
     ),
   );
@@ -76,7 +77,11 @@ Widget buildLoadingFrame(double progressValue) {
 Widget buildQuoteFrame() {
   return Container(
     decoration: const BoxDecoration(
-      color: AppColors.backgroundColorFirstPageQuote,
+      color: AppColors.backgroundColorSplashScreenQuote,
+      image: DecorationImage(
+        image: AssetImage('assets/images/group.png'),
+        fit: BoxFit.cover,
+      ),
     ),
     child: const Center(
       child: Column(
@@ -88,21 +93,23 @@ Widget buildQuoteFrame() {
             child: Text(
               '"Health is the complete harmony of the body and soul."',
               style: TextStyle(
-                  fontSize: 30,
-                  fontStyle: FontStyle.normal,
-                  fontFamily: 'PlusJakartaSans',
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                fontSize: 30,
+                fontStyle: FontStyle.normal,
+                fontFamily: 'PlusJakartaSans',
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
               textAlign: TextAlign.center,
             ),
           ),
           Text(
             "— Aristotle",
             style: TextStyle(
-                fontSize: 24,
-                fontStyle: FontStyle.normal,
-                fontFamily: 'PlusJakartaSans',
-                color: Colors.blue),
+              fontSize: 24,
+              fontStyle: FontStyle.normal,
+              fontFamily: 'PlusJakartaSans',
+              color: Colors.blue,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
