@@ -52,7 +52,7 @@ class _LoadingFrameViewState extends State<LoadingFrameView> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(
                 left: 100,
