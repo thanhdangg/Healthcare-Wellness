@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:healthcare_wellness/screens/home/home_page.dart';
+import 'package:healthcare_wellness/screens/splash/widgets/splash.dart';
 import 'dart:async';
-
-import '../home/home_page.dart';
-import 'widgets/splash.dart';
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 

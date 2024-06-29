@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'loading_frame_view.dart';
-import 'loading_number_frame_view.dart';
-import 'logo_frame_view.dart';
-import 'quote_frame_view.dart';
+import 'package:healthcare_wellness/screens/splash/widgets/loading_frame_view.dart';
+import 'package:healthcare_wellness/screens/splash/widgets/loading_number_frame_view.dart';
+import 'package:healthcare_wellness/screens/splash/widgets/logo_frame_view.dart';
+import 'package:healthcare_wellness/screens/splash/widgets/quote_frame_view.dart';
 
 
 
