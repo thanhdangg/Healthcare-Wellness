@@ -4,44 +4,49 @@ import 'package:healthcare_wellness/configs/app_colors.dart';
 import 'dart:async';
 
 import 'package:healthcare_wellness/presentation/screens/home_page.dart';
-import 'package:healthcare_wellness/presentation/widgets/first_page.dart';
+import 'package:healthcare_wellness/presentation/widgets/splash_page/splash_page.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashPageState extends State<SplashPage> {
   late PageController _pageController;
   int _currentPageIndex = 0;
   late Timer _timer;
   double _progressValue = 0.0;
-  double _SplashScreenOpacity = 0.0;
+  double _SplashPageOpacity = 0.0;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
-    _startSplashScreenTimer();
-    _fadeInSplashScreen();
+    _startSplashPageTimer();
+    _fadeInSplashPage();
   }
 
-  void _fadeInSplashScreen() {
-    Timer.periodic(Duration(milliseconds: 100), (timer) {
-      setState(() {
-        if (_SplashScreenOpacity < 1.0) {
-          _SplashScreenOpacity += 0.1;
-        } else {
-          _SplashScreenOpacity = 1.0;
-          timer.cancel();
-        }
-      });
-    });
+  void _fadeInSplashPage() {
+    Timer.periodic(
+      Duration(milliseconds: 100),
+      (timer) {
+        setState(
+          () {
+            if (_SplashPageOpacity < 1.0) {
+              _SplashPageOpacity += 0.1;
+            } else {
+              _SplashPageOpacity = 1.0;
+              timer.cancel();
+            }
+          },
+        );
+      },
+    );
   }
 
-  void _startSplashScreenTimer() {
+  void _startSplashPageTimer() {
     _timer = Timer.periodic(Duration(seconds: 4), (timer) {
       if (_currentPageIndex < 3) {
         setState(() {
@@ -104,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
               duration: Duration(seconds: 1),
               child: index == 0
                   ? Opacity(
-                      opacity: _SplashScreenOpacity.clamp(0.0, 1.0),
+                      opacity: _SplashPageOpacity.clamp(0.0, 1.0),
                       child: buildPage(index, _progressValue),
                     )
                   : buildPage(index, _progressValue),
