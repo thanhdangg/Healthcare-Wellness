@@ -9,6 +9,9 @@ class AppColors {
   static const textLogoColor = Color(0xFF5D6A85);
   static const backgroundColorSplashScreen = Color(0xFF0F67FE);
   static const backgroundColorSplashScreenQuote = Color(0xFFD0E4FF);
+  static const textAppName = Color(0xFF0F67FE);
+  static const backgroundLinearProgressIndicator = Color(0xFFDCE1E8);
+
 
 
 }
