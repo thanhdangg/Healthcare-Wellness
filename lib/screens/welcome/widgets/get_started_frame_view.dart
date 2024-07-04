@@ -4,24 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:healthcare_wellness/configs/app_colors.dart';
 import 'package:healthcare_wellness/configs/app_font.dart';
+import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
+import 'package:healthcare_wellness/screens/welcome/welcome_page.dart';
 import 'package:healthcare_wellness/utils/custom_button.dart';
 
-class FirstWelcomeFrameView extends StatelessWidget {
-  final VoidCallback onNext;
-  final VoidCallback onSignIn;
+class GetStartedFrameView extends StatelessWidget {
+  void onGetStarted(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => WelcomePage(),
+      ),
+    );
+  }
 
-  const FirstWelcomeFrameView({
-    super.key,
-    required this.onNext,
-    required this.onSignIn,
-  });
+  void onSignIn(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const SignInPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return _buildFirstFragmet();
+    return Scaffold(
+      backgroundColor: Colors.white, 
+      body: _buildFirstFragmet(context),
+    );
   }
 
-  Widget _buildFirstFragmet() {
+  Widget _buildFirstFragmet(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +59,7 @@ class FirstWelcomeFrameView extends StatelessWidget {
           SizedBox(height: 32),
           CustomButton(
             text: 'Get Started',
-            onPressed: onNext,
+            onPressed: () => onGetStarted(context),
           ),
           const SizedBox(height: 32),
           RichText(
@@ -63,7 +75,7 @@ class FirstWelcomeFrameView extends StatelessWidget {
                     color: AppColors.onErrorColor,
                   ),
                   recognizer: TapGestureRecognizer()
-                    ..onTap = onSignIn, // Sử dụng callback onSignIn
+                    ..onTap = () => onSignIn(context),
                 ),
               ],
             ),

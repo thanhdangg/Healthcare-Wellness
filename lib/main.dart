@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       prefs.setBool('isFirstTime', false);
       return SplashPage(); 
     } else {
-      return HomePage(title: "Home Page",); // Trả về HomePage nếu không phải lần đầu
+      return HomePage(title: "Home Page",); 
     }
   }
 
@@ -28,16 +28,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FutureBuilder<Widget>(
-        future: getLandingPage(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return snapshot.data!; 
-          } else {
-            return SplashPage(); 
-          }
-        },
-      ),
+      // home: FutureBuilder<Widget>(
+      //   future: getLandingPage(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.done) {
+      //       return snapshot.data!; 
+      //     } else {
+      //       return SplashPage(); 
+      //     }
+      //   },
+      // ),
+      home: SplashPage(),
       debugShowCheckedModeBanner: false,      
     );
   }
