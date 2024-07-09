@@ -42,13 +42,13 @@ class GetStartedFrameView extends StatelessWidget {
           const SizedBox(height: 32),
           RichText(
             text: TextSpan(
-              style: AppFont.extralfont,
+              style: AppFont.heading_extra_bold,
               children: <TextSpan>[
                 const TextSpan(text: "     Welcome to \n"),
                 TextSpan(
                   text: "asklepios",
                   style:
-                      AppFont.extralfont.copyWith(color: AppColors.textAppName),
+                      AppFont.heading_extra_bold.copyWith(color: AppColors.textAppName),
                 ),
                 TextSpan(text: " UI Kit"),
               ],
@@ -64,14 +64,14 @@ class GetStartedFrameView extends StatelessWidget {
           const SizedBox(height: 32),
           RichText(
             text: TextSpan(
-              style: AppFont.privatefont,
+              style: AppFont.body_text_bold,
               children: <TextSpan>[
                 const TextSpan(
                   text: "Already have an account?   ",
                 ),
                 TextSpan(
                   text: " Sign In",
-                  style: AppFont.privatefont.copyWith(
+                  style: AppFont.body_text_bold.copyWith(
                     color: AppColors.onErrorColor,
                   ),
                   recognizer: TapGestureRecognizer()

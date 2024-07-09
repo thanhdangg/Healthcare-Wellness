@@ -34,13 +34,14 @@ class InforFrameView extends StatelessWidget {
                 const SizedBox(height: 32),
                 Text(
                   title,
-                  style: AppFont.extralfont,
+                  style: AppFont.heading_extra_bold,
                   textAlign: TextAlign.left,
                 ),
                 const SizedBox(height: 12),
                 Text(
                   description,
-                  style: AppFont.privatefont.copyWith(
+                  style: AppFont.body_text_bold
+                  .copyWith(
                     color: AppColors.textLogoColor,
                   ),
                   textAlign: TextAlign.left,

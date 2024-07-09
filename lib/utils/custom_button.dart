@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
       ),
       label: Text(
         text ?? '',
-        style: AppFont.privatefont.copyWith(
+        style: AppFont.body_text_bold.copyWith(
           color: Colors.white,
           fontSize: 16,
         ),

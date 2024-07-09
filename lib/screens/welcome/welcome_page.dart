@@ -86,7 +86,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     onPressed: _navToSignIn,
                     child: Text(
                       'Skip',
-                      style: AppFont.privatefont.copyWith(
+                      style: AppFont.body_text_bold.copyWith(
                         color: AppColors.textLogoColor,
                       ),
                     ),
