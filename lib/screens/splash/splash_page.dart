@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:healthcare_wellness/screens/home/home_page.dart';
 import 'package:healthcare_wellness/screens/splash/widgets/splash.dart';
 import 'dart:async';
+import 'package:healthcare_wellness/screens/welcome/widgets/get_started_frame_view.dart';
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -53,9 +52,10 @@ class _SplashPageState extends State<SplashPage> {
         timer.cancel();
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => const HomePage(
-              title: "Home",
-            ),
+            // builder: (_) => const HomePage(
+            //   title: "Home",
+            // ),
+            builder: (_) => GetStartedFrameView(),
           ),
         );
       }
