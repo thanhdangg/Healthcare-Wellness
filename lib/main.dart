@@ -1,45 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/screens/home/home_page.dart';
+import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
 import 'package:healthcare_wellness/screens/splash/splash_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   Future<Widget> getLandingPage() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    final bool isFirstLaunch = pref.getBool('isFirstLaunch') ?? true;
 
-    if (isFirstTime) {
-      prefs.setBool('isFirstTime', false);
-      return SplashPage(); 
+    if (isFirstLaunch) {
+      pref.setBool('isFirstLaunch', false);
+      return const SplashPage();
     } else {
-      return HomePage(title: "Home Page",); 
+      return const SignInPage();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "My App",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      home: MaterialApp.router(
+        routerConfig: AppRouter.router,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        darkTheme: ThemeData(
+          primarySwatch: Colors.blue,
+          brightness: Brightness.dark,
+        ),
+        builder: (context, child) => FutureBuilder<Widget>(
+          future: getLandingPage(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return snapshot.data!;
+            } else {
+              return const SplashPage();
+            }
+          },
+        ),
       ),
-      // home: FutureBuilder<Widget>(
-      //   future: getLandingPage(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.done) {
-      //       return snapshot.data!; 
-      //     } else {
-      //       return SplashPage(); 
-      //     }
-      //   },
-      // ),
-      home: SplashPage(),
-      debugShowCheckedModeBanner: false,      
     );
   }
 }

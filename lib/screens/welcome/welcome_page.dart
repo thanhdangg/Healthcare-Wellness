@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:healthcare_wellness/configs/app_colors.dart';
 import 'package:healthcare_wellness/configs/app_font.dart';
-import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
 import 'package:healthcare_wellness/screens/welcome/widgets/infor_frame_view.dart';
+import 'package:healthcare_wellness/utils/widgets/custom_button.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -30,11 +31,7 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   void _navToSignIn() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const SignInPage(),
-      ),
-    );
+    context.go('/sign_in');
   }
 
   void _onNext() {
@@ -146,13 +143,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   Positioned(
                     bottom: 40,
                     right: 20,
-                    child: FloatingActionButton(
+                    child: CustomButton(
                       onPressed: _onNext,
-                      backgroundColor: AppColors.backgroundColor,
-                      child: const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                      ),
+                      color: AppColors.backgroundColor,
                     ),
                   ),
                 ],
