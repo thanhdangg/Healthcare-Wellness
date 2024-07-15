@@ -1,18 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:healthcare_wellness/configs/app_colors.dart';
 import 'package:healthcare_wellness/configs/app_font.dart';
 import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
 import 'package:healthcare_wellness/screens/welcome/welcome_page.dart';
-import 'package:healthcare_wellness/utils/custom_button.dart';
+import 'package:healthcare_wellness/utils/widgets/custom_button.dart';
 
 class GetStartedFrameView extends StatelessWidget {
+  const GetStartedFrameView({super.key});
+
   void onGetStarted(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) => WelcomePage(),
+        builder: (_) => const WelcomePage(),
       ),
     );
   }

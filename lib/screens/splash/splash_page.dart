@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare_wellness/screens/splash/widgets/splash.dart';
 import 'dart:async';
 import 'package:healthcare_wellness/screens/welcome/widgets/get_started_frame_view.dart';
+
+@RoutePage()
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -26,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
 
   void _fadeInSplashPage() {
     Timer.periodic(
-      Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         setState(
           () {
@@ -43,7 +46,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _startSplashPageTimer() {
-    _timer = Timer.periodic(Duration(seconds: 4), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
       if (_currentPageIndex < 3) {
         setState(() {
           _currentPageIndex++;
@@ -62,7 +65,7 @@ class _SplashPageState extends State<SplashPage> {
     });
 
     Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () {
         _startLoading();
       },
@@ -71,7 +74,7 @@ class _SplashPageState extends State<SplashPage> {
 
   void _startLoading() {
     _timer = Timer.periodic(
-      Duration(milliseconds: 100),
+      const Duration(milliseconds: 100),
       (timer) {
         setState(
           () {
@@ -103,7 +106,7 @@ class _SplashPageState extends State<SplashPage> {
           (index) {
             return AnimatedOpacity(
               opacity: _currentPageIndex == index ? 1.0 : 0.0,
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
               child: index == 0
                   ? Opacity(
                       opacity: _SplashPageOpacity.clamp(0.0, 1.0),
