@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
     this.iconData = Icons.navigate_next,
     required this.onPressed,
     this.color = AppColors.backgroundColorSplashScreen,
+
   }) : super(key: key);
 
   @override

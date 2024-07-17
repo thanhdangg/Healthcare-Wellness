@@ -6,12 +6,12 @@ import 'package:healthcare_wellness/configs/app_font.dart';
 import 'package:healthcare_wellness/utils/widgets/button_login_with.dart';
 import 'package:healthcare_wellness/utils/widgets/custom_button.dart';
 
-class SignInFrameView extends StatefulWidget {
+class SignUpFrameView extends StatefulWidget {
   @override
-  _SignInFrameViewState createState() => _SignInFrameViewState();
+  _SignUpFrameViewState createState() => _SignUpFrameViewState();
 }
 
-class _SignInFrameViewState extends State<SignInFrameView> {
+class _SignUpFrameViewState extends State<SignUpFrameView> {
   bool _obscureText = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -30,7 +30,6 @@ class _SignInFrameViewState extends State<SignInFrameView> {
   }
 
   void onSignUp(BuildContext context) {
-    print("Sign up");
     context.go('/sign_up');
   }
 
@@ -73,14 +72,21 @@ class _SignInFrameViewState extends State<SignInFrameView> {
             Image.asset('assets/images/img_logo.png'),
             const SizedBox(height: 20.0),
             const Text(
-              "Sign in",
+              "Sign Up For Free!",
               style: AppFont.heading_extra_bold,
             ),
             const SizedBox(height: 20.0),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Email Address',
+                style: AppFont.body_text_bold,
+              ),
+            ),
             TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
-                labelText: 'Email Address',
+                labelText: 'Enter your email address...',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(
                   Icons.email_outlined,
@@ -99,6 +105,13 @@ class _SignInFrameViewState extends State<SignInFrameView> {
             ),
             const SizedBox(
               height: 20,
+            ),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Password',
+                style: AppFont.body_text_bold,
+              ),
             ),
             TextFormField(
               controller: _passwordController,
