@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
           right: 28,
         ),
       ),
-      iconAlignment: IconAlignment.end,
+      // iconAlignment: IconAlignment.end,
     );
   }
 }

@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
