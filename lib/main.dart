@@ -1,63 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:healthcare_wellness/configs/app_router.dart';
-import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
-import 'package:healthcare_wellness/screens/sign_up/sign_up_page.dart';
-import 'package:healthcare_wellness/screens/splash/splash_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
-  // Future<String> getInitialRoute() async {
-  //   final SharedPreferences pref = await SharedPreferences.getInstance();
-  //   final bool isFirstLaunch = pref.getBool('isFirstLaunch') ?? true;
+  // make sure you don't initiate your router
+  // inside of the build function.
+  final _appRouter = AppRouter();
 
-  //   if (isFirstLaunch) {
-  //     pref.setBool('isFirstLaunch', false);
-  //   return '/';
+  // Future<Widget> getLandingPage() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+
+  //   if (isFirstTime) {
+  //     prefs.setBool('isFirstTime', false);
+  //     return const SplashPage();
   //   } else {
-  //     return '/sign_in';
+  //     return const HomePage(
+  //       title: "Home Page",
+  //     );
   //   }
   // }
-  Future<Widget> getLandingPage() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    final bool isFirstLaunch = pref.getBool('isFirstLaunch') ?? true;
-
-    if (isFirstLaunch) {
-      pref.setBool('isFirstLaunch', false);
-      return const SplashPage();
-    } else {
-      return  SignUpPage();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MaterialApp.router(
-        routerConfig: AppRouter.router,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        darkTheme: ThemeData(
-          primarySwatch: Colors.blue,
-          brightness: Brightness.dark,
-        ),
-        builder: (context, child) => FutureBuilder<Widget>(
-          future: getLandingPage(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return snapshot.data!;
-            } else {
-              return const SplashPage();
-            }
-          },
-        ),
+    return MaterialApp.router(
+      title: "My App",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
+      routerConfig: _appRouter.config(),
     );
   }
 }

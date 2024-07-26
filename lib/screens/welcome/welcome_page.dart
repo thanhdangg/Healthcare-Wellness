@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healthcare_wellness/configs/app_colors.dart';
@@ -5,7 +6,10 @@ import 'package:healthcare_wellness/configs/app_font.dart';
 import 'package:healthcare_wellness/screens/welcome/widgets/infor_frame_view.dart';
 import 'package:healthcare_wellness/utils/widgets/custom_button.dart';
 
+@RoutePage()
 class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
+
   @override
   State<WelcomePage> createState() => _WelcomePageState();
 }
@@ -62,8 +66,7 @@ class _WelcomePageState extends State<WelcomePage> {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 30, right: 20, top: 20, bottom: 20),
+              padding: const EdgeInsets.only(left: 30, right: 20, top: 20, bottom: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -72,8 +75,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     width: 160,
                     child: LinearProgressIndicator(
                       value: ((_currentPageIndex + 1) / numPages),
-                      backgroundColor:
-                          AppColors.backgroundLinearProgressIndicator,
+                      backgroundColor: AppColors.backgroundLinearProgressIndicator,
                       valueColor: const AlwaysStoppedAnimation<Color>(
                         AppColors.backgroundColor,
                       ),

@@ -1,15 +1,23 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:healthcare_wellness/configs/app_colors.dart';
 import 'package:healthcare_wellness/configs/app_font.dart';
+import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
+import 'package:healthcare_wellness/screens/welcome/welcome_page.dart';
+>>>>>> develop
 import 'package:healthcare_wellness/utils/widgets/custom_button.dart';
 
 class GetStartedFrameView extends StatelessWidget {
   const GetStartedFrameView({super.key});
 
   void onGetStarted(BuildContext context) {
-    context.go('/welcome');
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const WelcomePage(),
+      ),
+    );
   }
 
   void onSignIn(BuildContext context) {

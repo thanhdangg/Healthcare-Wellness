@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:healthcare_wellness/screens/splash/widgets/splash.dart';
 import 'dart:async';
+import 'package:healthcare_wellness/screens/welcome/widgets/get_started_frame_view.dart';
 
+@RoutePage()
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -46,10 +49,8 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _startSplashPageTimer() {
-    _timer = Timer.periodic(
-        const Duration(
-          seconds: 4,
-        ), (timer) {
+
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
       if (_currentPageIndex < 3) {
         setState(() {
           _currentPageIndex++;
