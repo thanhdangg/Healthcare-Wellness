@@ -53,7 +53,7 @@ class _SplashPageState extends State<SplashPage> {
         });
       } else {
         timer.cancel();
-        Navigator.of(context).pushReplacement(
+        Navigator.of(context).push(
           MaterialPageRoute(
             // builder: (_) => const HomePage(
             //   title: "Home",
