@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/screens/splash/widgets/splash.dart';
 import 'dart:async';
 import 'package:healthcare_wellness/screens/welcome/widgets/get_started_frame_view.dart';
@@ -17,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
   int _currentPageIndex = 0;
   late Timer _timer;
   double _progressValue = 0.0;
-  double _SplashPageOpacity = 0.0;
+  double _splashPageOpacity = 0.0;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     _pageController = PageController(initialPage: 0);
     _startSplashPageTimer();
     _fadeInSplashPage();
+  
   }
 
   void _fadeInSplashPage() {
@@ -33,10 +35,10 @@ class _SplashPageState extends State<SplashPage> {
       (timer) {
         setState(
           () {
-            if (_SplashPageOpacity < 1.0) {
-              _SplashPageOpacity += 0.1;
+            if (_splashPageOpacity < 1.0) {
+              _splashPageOpacity += 0.1;
             } else {
-              _SplashPageOpacity = 1.0;
+              _splashPageOpacity = 1.0;
               timer.cancel();
             }
           },
@@ -55,9 +57,6 @@ class _SplashPageState extends State<SplashPage> {
         timer.cancel();
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            // builder: (_) => const HomePage(
-            //   title: "Home",
-            // ),
             builder: (_) => GetStartedFrameView(),
           ),
         );
@@ -109,7 +108,7 @@ class _SplashPageState extends State<SplashPage> {
               duration: const Duration(seconds: 1),
               child: index == 0
                   ? Opacity(
-                      opacity: _SplashPageOpacity.clamp(0.0, 1.0),
+                      opacity: _splashPageOpacity.clamp(0.0, 1.0),
                       child: buildPage(index, _progressValue),
                     )
                   : buildPage(index, _progressValue),

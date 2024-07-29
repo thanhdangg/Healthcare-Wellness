@@ -50,13 +50,13 @@ class GetStartedFrameView extends StatelessWidget {
                   style:
                       AppFont.heading_extra_bold.copyWith(color: AppColors.textAppName),
                 ),
-                TextSpan(text: " UI Kit"),
+                const TextSpan(text: " UI Kit"),
               ],
             ),
           ),
           const SizedBox(height: 32),
           Image.asset('assets/images/img_welcome_first.png'),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           CustomButton(
             text: 'Get Started',
             onPressed: () => onGetStarted(context),
