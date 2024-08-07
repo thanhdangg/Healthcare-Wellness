@@ -16,7 +16,8 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     HomeRoute.name: (routeData) {
-      final args = routeData.argsAs<HomeRouteArgs>();
+      final args =
+          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: HomePage(
@@ -34,7 +35,7 @@ abstract class _$AppRouter extends RootStackRouter {
     SignUpRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: SignUpPage(),
+        child: const SignUpPage(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -57,7 +58,7 @@ abstract class _$AppRouter extends RootStackRouter {
 class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
     Key? key,
-    required String title,
+    String? title,
     List<PageRouteInfo>? children,
   }) : super(
           HomeRoute.name,
@@ -76,12 +77,12 @@ class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
 class HomeRouteArgs {
   const HomeRouteArgs({
     this.key,
-    required this.title,
+    this.title,
   });
 
   final Key? key;
 
-  final String title;
+  final String? title;
 
   @override
   String toString() {

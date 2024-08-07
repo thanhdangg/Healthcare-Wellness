@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/configs/app_router.dart';
+import 'package:healthcare_wellness/repositories/device_repo.dart';
+import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 import 'package:healthcare_wellness/screens/sign_up/bloc/sign_up_bloc.dart';
 
 void main() {
@@ -51,17 +53,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(context: context)),
-      ],
-      child: MaterialApp.router(
-        title: "My App",
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return RepositoryProvider(
+      create: (context) => DeviceRepository(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(context: context)),
+          BlocProvider<HomeBloc>(create: (context) => HomeBloc(context: context)),
+        ],
+        child: MaterialApp.router(
+          title: "My App",
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          debugShowCheckedModeBanner: false,
+          routerConfig: _appRouter.config(),
         ),
-        debugShowCheckedModeBanner: false,
-        routerConfig: _appRouter.config(),
       ),
     );
   }
