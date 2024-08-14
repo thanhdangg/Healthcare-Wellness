@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/configs/app_router.dart';
+import 'package:healthcare_wellness/configs/locator.dart';
 import 'package:healthcare_wellness/repositories/device_repo.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 import 'package:healthcare_wellness/screens/sign_up/bloc/sign_up_bloc.dart';
@@ -17,7 +18,7 @@ void main() {
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarIconBrightness: Brightness.light,
       systemNavigationBarColor: Colors.black));
-
+  setupLocator();
   runApp(const MyApp());
 }
 
@@ -45,10 +46,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // make sure you don't initiate your router
   // inside of the build function.
-  final _appRouter = AppRouter();
+  final _appRouter = getIt<AppRouter>();
+
   @override
   void initState() {
     super.initState();
+    debugPrint("========${_appRouter.hashCode}");
   }
 
   @override

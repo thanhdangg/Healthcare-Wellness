@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/screens/splash/widgets/splash.dart';
 import 'dart:async';
 import 'package:healthcare_wellness/screens/welcome/widgets/get_started_frame_view.dart';
