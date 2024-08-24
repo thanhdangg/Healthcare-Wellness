@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/configs/locator.dart';
 import 'package:healthcare_wellness/repositories/device_repo.dart';
+import 'package:healthcare_wellness/repositories/news_repo.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 import 'package:healthcare_wellness/screens/sign_up/bloc/sign_up_bloc.dart';
 
@@ -51,7 +52,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    debugPrint("========${_appRouter.hashCode}");
   }
 
   @override

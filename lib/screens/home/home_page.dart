@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
-import 'package:healthcare_wellness/screens/home/widgets/item_device.dart';
+import 'package:healthcare_wellness/screens/home/widgets/item_news.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
   late HomeBloc _homeBloc;
   final ScrollController _scrollController = ScrollController();
 
@@ -23,12 +22,6 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
   }
 
   @override
@@ -40,31 +33,44 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Home'),
-      ),
-      body: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-        return ListView.separated(
-          controller: _scrollController,
-          separatorBuilder: (context, index) => const SizedBox(height: 8.0),
-          itemBuilder: (context, index) {
-            final device = state.devices?[index];
-            return ItemDevice(device: device!);
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          leading: const Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.black,
+        ),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return SizedBox(
+              height: double.infinity,
+              child: Column(
+                children: [
+                  Container(
+                    height: 180,
+                    color: Colors.amber,
+                    margin: const EdgeInsets.all(16.0),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                      controller: _scrollController,
+                      separatorBuilder: (context, index) => const SizedBox(height: 12.0),
+                      itemBuilder: (context, index) {
+                        final article = state.articleList?[index];
+                        return ItemNews(article: article!);
+                      },
+                      itemCount: state.articleList?.length ?? 0,
+                    ),
+                  ),
+                ],
+              ),
+            );
           },
-          itemCount: state.devices?.length ?? 0,
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _scrollController.animateTo(0.0,
-              duration: const Duration(milliseconds: 1000), curve: Curves.easeIn);
-        },
-        tooltip: 'Increment',
-        child: const Icon(
-          Icons.add,
-          color: Colors.amber,
         ),
       ),
     );
