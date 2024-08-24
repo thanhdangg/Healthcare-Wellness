@@ -26,7 +26,10 @@ class _ItemDeviceState extends State<ItemDevice> {
       ),
       child: Column(
         children: [
-          Text(widget.device.name ?? ''),
+          Text(
+            widget.device.name ?? '',
+            maxLines: 2,
+            ),
           Text('${widget.device.data?.price ?? 0.0}'),
         ],
       ),

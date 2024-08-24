@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 import 'package:healthcare_wellness/screens/home/widgets/item_news.dart';
 
@@ -48,26 +49,34 @@ class _HomePageState extends State<HomePage> {
           builder: (context, state) {
             return SizedBox(
               height: double.infinity,
-              child: Column(
-                children: [
-                  Container(
-                    height: 180,
-                    color: Colors.amber,
-                    margin: const EdgeInsets.all(16.0),
-                  ),
-                  Expanded(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 180,
+                      color: Colors.amber,
+                      margin: const EdgeInsets.all(16.0),
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 16.0),
                       controller: _scrollController,
-                      separatorBuilder: (context, index) => const SizedBox(height: 12.0),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 12.0),
                       itemBuilder: (context, index) {
                         final article = state.articleList?[index];
-                        return ItemNews(article: article!);
+                        return ItemNews(
+                            article: article!,
+                            onTap: (article) {
+                              context.router
+                                  .push(DetailRoute(article: article));
+                            });
                       },
                       itemCount: state.articleList?.length ?? 0,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

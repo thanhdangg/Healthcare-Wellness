@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/configs/locator.dart';
 import 'package:healthcare_wellness/repositories/device_repo.dart';
-import 'package:healthcare_wellness/repositories/news_repo.dart';
+import 'package:healthcare_wellness/repositories/news_response_model.dart';
+import 'package:healthcare_wellness/screens/details/detail_page.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 import 'package:healthcare_wellness/screens/sign_up/bloc/sign_up_bloc.dart';
 
@@ -56,8 +57,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => DeviceRepository(),
+
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<NewsResponseModel>(
+          create: (context) => NewsResponseModel(),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(context: context)),
