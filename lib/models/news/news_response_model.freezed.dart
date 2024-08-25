@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'news_model.dart';
+part of 'news_response_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-NewsModel _$NewsModelFromJson(Map<String, dynamic> json) {
-  return _NewsModel.fromJson(json);
+NewsResponseModel _$NewsResponseModelFromJson(Map<String, dynamic> json) {
+  return _NewsResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NewsModel {
+mixin _$NewsResponseModel {
   String? get status => throw _privateConstructorUsedError;
   int? get totalResults => throw _privateConstructorUsedError;
   List<Article>? get articles => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NewsModelCopyWith<NewsModel> get copyWith =>
+  $NewsResponseModelCopyWith<NewsResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NewsModelCopyWith<$Res> {
-  factory $NewsModelCopyWith(NewsModel value, $Res Function(NewsModel) then) =
-      _$NewsModelCopyWithImpl<$Res, NewsModel>;
+abstract class $NewsResponseModelCopyWith<$Res> {
+  factory $NewsResponseModelCopyWith(
+          NewsResponseModel value, $Res Function(NewsResponseModel) then) =
+      _$NewsResponseModelCopyWithImpl<$Res, NewsResponseModel>;
   @useResult
   $Res call({String? status, int? totalResults, List<Article>? articles});
 }
 
 /// @nodoc
-class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
-    implements $NewsModelCopyWith<$Res> {
-  _$NewsModelCopyWithImpl(this._value, this._then);
+class _$NewsResponseModelCopyWithImpl<$Res, $Val extends NewsResponseModel>
+    implements $NewsResponseModelCopyWith<$Res> {
+  _$NewsResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -73,22 +74,22 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
 }
 
 /// @nodoc
-abstract class _$$NewsModelImplCopyWith<$Res>
-    implements $NewsModelCopyWith<$Res> {
-  factory _$$NewsModelImplCopyWith(
-          _$NewsModelImpl value, $Res Function(_$NewsModelImpl) then) =
-      __$$NewsModelImplCopyWithImpl<$Res>;
+abstract class _$$NewsResponseModelImplCopyWith<$Res>
+    implements $NewsResponseModelCopyWith<$Res> {
+  factory _$$NewsResponseModelImplCopyWith(_$NewsResponseModelImpl value,
+          $Res Function(_$NewsResponseModelImpl) then) =
+      __$$NewsResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? status, int? totalResults, List<Article>? articles});
 }
 
 /// @nodoc
-class __$$NewsModelImplCopyWithImpl<$Res>
-    extends _$NewsModelCopyWithImpl<$Res, _$NewsModelImpl>
-    implements _$$NewsModelImplCopyWith<$Res> {
-  __$$NewsModelImplCopyWithImpl(
-      _$NewsModelImpl _value, $Res Function(_$NewsModelImpl) _then)
+class __$$NewsResponseModelImplCopyWithImpl<$Res>
+    extends _$NewsResponseModelCopyWithImpl<$Res, _$NewsResponseModelImpl>
+    implements _$$NewsResponseModelImplCopyWith<$Res> {
+  __$$NewsResponseModelImplCopyWithImpl(_$NewsResponseModelImpl _value,
+      $Res Function(_$NewsResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +99,7 @@ class __$$NewsModelImplCopyWithImpl<$Res>
     Object? totalResults = freezed,
     Object? articles = freezed,
   }) {
-    return _then(_$NewsModelImpl(
+    return _then(_$NewsResponseModelImpl(
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -117,13 +118,13 @@ class __$$NewsModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NewsModelImpl implements _NewsModel {
-  const _$NewsModelImpl(
+class _$NewsResponseModelImpl implements _NewsResponseModel {
+  const _$NewsResponseModelImpl(
       {this.status, this.totalResults, final List<Article>? articles})
       : _articles = articles;
 
-  factory _$NewsModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NewsModelImplFromJson(json);
+  factory _$NewsResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NewsResponseModelImplFromJson(json);
 
   @override
   final String? status;
@@ -141,14 +142,14 @@ class _$NewsModelImpl implements _NewsModel {
 
   @override
   String toString() {
-    return 'NewsModel(status: $status, totalResults: $totalResults, articles: $articles)';
+    return 'NewsResponseModel(status: $status, totalResults: $totalResults, articles: $articles)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NewsModelImpl &&
+            other is _$NewsResponseModelImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.totalResults, totalResults) ||
                 other.totalResults == totalResults) &&
@@ -163,25 +164,26 @@ class _$NewsModelImpl implements _NewsModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NewsModelImplCopyWith<_$NewsModelImpl> get copyWith =>
-      __$$NewsModelImplCopyWithImpl<_$NewsModelImpl>(this, _$identity);
+  _$$NewsResponseModelImplCopyWith<_$NewsResponseModelImpl> get copyWith =>
+      __$$NewsResponseModelImplCopyWithImpl<_$NewsResponseModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NewsModelImplToJson(
+    return _$$NewsResponseModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _NewsModel implements NewsModel {
-  const factory _NewsModel(
+abstract class _NewsResponseModel implements NewsResponseModel {
+  const factory _NewsResponseModel(
       {final String? status,
       final int? totalResults,
-      final List<Article>? articles}) = _$NewsModelImpl;
+      final List<Article>? articles}) = _$NewsResponseModelImpl;
 
-  factory _NewsModel.fromJson(Map<String, dynamic> json) =
-      _$NewsModelImpl.fromJson;
+  factory _NewsResponseModel.fromJson(Map<String, dynamic> json) =
+      _$NewsResponseModelImpl.fromJson;
 
   @override
   String? get status;
@@ -191,7 +193,7 @@ abstract class _NewsModel implements NewsModel {
   List<Article>? get articles;
   @override
   @JsonKey(ignore: true)
-  _$$NewsModelImplCopyWith<_$NewsModelImpl> get copyWith =>
+  _$$NewsResponseModelImplCopyWith<_$NewsResponseModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

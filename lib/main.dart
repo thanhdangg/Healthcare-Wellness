@@ -56,8 +56,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => DeviceRepository(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => NewsRepository(),
+        )
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(context: context)),

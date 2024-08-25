@@ -16,13 +16,22 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     HomeRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
+      final args = routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: HomePage(
           key: args.key,
           title: args.title,
+        ),
+      );
+    },
+    NewsDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<NewsDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: NewsDetailPage(
+          key: args.key,
+          article: args.article,
         ),
       );
     },
@@ -87,6 +96,43 @@ class HomeRouteArgs {
   @override
   String toString() {
     return 'HomeRouteArgs{key: $key, title: $title}';
+  }
+}
+
+/// generated route for
+/// [NewsDetailPage]
+class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
+  NewsDetailRoute({
+    Key? key,
+    required Article article,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NewsDetailRoute.name,
+          args: NewsDetailRouteArgs(
+            key: key,
+            article: article,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'NewsDetailRoute';
+
+  static const PageInfo<NewsDetailRouteArgs> page = PageInfo<NewsDetailRouteArgs>(name);
+}
+
+class NewsDetailRouteArgs {
+  const NewsDetailRouteArgs({
+    this.key,
+    required this.article,
+  });
+
+  final Key? key;
+
+  final Article article;
+
+  @override
+  String toString() {
+    return 'NewsDetailRouteArgs{key: $key, article: $article}';
   }
 }
 

@@ -1,26 +1,26 @@
 // To parse this JSON data, do
 //
-//     final newsModel = newsModelFromJson(jsonString);
+//     final newsResponseModel = newsResponseModelFromJson(jsonString);
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 
-part 'news_model.freezed.dart';
-part 'news_model.g.dart';
+part 'news_response_model.freezed.dart';
+part 'news_response_model.g.dart';
 
-NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
+NewsResponseModel newsResponseModelFromJson(String str) => NewsResponseModel.fromJson(json.decode(str));
 
-String newsModelToJson(NewsModel data) => json.encode(data.toJson());
+String newsResponseModelToJson(NewsResponseModel data) => json.encode(data.toJson());
 
 @freezed
-class NewsModel with _$NewsModel {
-    const factory NewsModel({
+class NewsResponseModel with _$NewsResponseModel {
+    const factory NewsResponseModel({
         String? status,
         int? totalResults,
         List<Article>? articles,
-    }) = _NewsModel;
+    }) = _NewsResponseModel;
 
-    factory NewsModel.fromJson(Map<String, dynamic> json) => _$NewsModelFromJson(json);
+    factory NewsResponseModel.fromJson(Map<String, dynamic> json) => _$NewsResponseModelFromJson(json);
 }
 
 @freezed

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_wellness/models/news/news_response_model.dart';
 import 'package:healthcare_wellness/screens/home/home_page.dart';
+import 'package:healthcare_wellness/screens/news_detail/news_detail_page.dart';
 import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
 import 'package:healthcare_wellness/screens/sign_up/sign_up_page.dart';
 import 'package:healthcare_wellness/screens/splash/splash_page.dart';
@@ -16,6 +18,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: WelcomeRoute.page),
         AutoRoute(page: SignInRoute.page),
         AutoRoute(page: SignUpRoute.page),
+        AutoRoute(page: NewsDetailRoute.page),
       ];
-      
 }

@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'news_model.dart';
+part of 'news_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NewsModelImpl _$$NewsModelImplFromJson(Map<String, dynamic> json) =>
-    _$NewsModelImpl(
+_$NewsResponseModelImpl _$$NewsResponseModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NewsResponseModelImpl(
       status: json['status'] as String?,
       totalResults: (json['totalResults'] as num?)?.toInt(),
       articles: (json['articles'] as List<dynamic>?)
@@ -15,7 +16,8 @@ _$NewsModelImpl _$$NewsModelImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$NewsModelImplToJson(_$NewsModelImpl instance) =>
+Map<String, dynamic> _$$NewsResponseModelImplToJson(
+        _$NewsResponseModelImpl instance) =>
     <String, dynamic>{
       'status': instance.status,
       'totalResults': instance.totalResults,
