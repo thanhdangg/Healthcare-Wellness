@@ -20,6 +20,25 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return SignUpBloc(context: context);
+      },
+      child: const SignUpView(),
+    );
+  }
+}
+
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
+
+  @override
+  State<SignUpView> createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
   final ValueNotifier<bool> _obscureText = ValueNotifier<bool>(false);
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -48,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void onLogin(BuildContext context) {
-    context.router.popAndPush(HomeRoute(title: "Home"));
+    context.router.popAndPush(const MainTabbarRoute());
   }
 
   void checkLogin(String email, String password) {

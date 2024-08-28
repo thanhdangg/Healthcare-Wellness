@@ -14,6 +14,26 @@ class NewsDetailPage extends StatefulWidget {
 class _NewsDetailPageState extends State<NewsDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const NewsDetailView();
+  }
+}
+
+class NewsDetailView extends StatefulWidget {
+  const NewsDetailView({super.key});
+
+  @override
+  State<NewsDetailView> createState() => _NewsDetailViewState();
+}
+
+class _NewsDetailViewState extends State<NewsDetailView> {
+  @override
+  void initState() {
+   
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.amber);
   }
 }

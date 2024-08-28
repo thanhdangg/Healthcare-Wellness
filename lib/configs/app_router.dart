@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare_wellness/models/news/news_response_model.dart';
+import 'package:healthcare_wellness/screens/explore/explore_page.dart';
 import 'package:healthcare_wellness/screens/home/home_page.dart';
+import 'package:healthcare_wellness/screens/main_tabbar/main_tab_bar_page.dart';
 import 'package:healthcare_wellness/screens/news_detail/news_detail_page.dart';
+import 'package:healthcare_wellness/screens/saved/saved_page.dart';
 import 'package:healthcare_wellness/screens/sign_in/sign_in_page.dart';
 import 'package:healthcare_wellness/screens/sign_up/sign_up_page.dart';
 import 'package:healthcare_wellness/screens/splash/splash_page.dart';
+import 'package:healthcare_wellness/screens/user_profile/user_profile_page.dart';
 import 'package:healthcare_wellness/screens/welcome/welcome_page.dart';
 part 'app_router.gr.dart';
 
@@ -14,10 +18,15 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRoute.page),
-        AutoRoute(page: HomeRoute.page, initial: true),
         AutoRoute(page: WelcomeRoute.page),
         AutoRoute(page: SignInRoute.page),
-        AutoRoute(page: SignUpRoute.page),
+        AutoRoute(page: SignUpRoute.page, initial: true),
         AutoRoute(page: NewsDetailRoute.page),
+        AutoRoute(page: MainTabbarRoute.page, children: [
+          AutoRoute(page: HomeRoute.page),
+          AutoRoute(page: ExploreRoute.page),
+          AutoRoute(page: SavedRoute.page),
+          AutoRoute(page: UserProfileRoute.page),
+        ]),
       ];
 }

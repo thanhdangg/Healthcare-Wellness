@@ -64,7 +64,6 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<SignUpBloc>(create: (context) => SignUpBloc(context: context)),
           BlocProvider<HomeBloc>(create: (context) => HomeBloc(context: context)),
         ],
         child: MaterialApp.router(
