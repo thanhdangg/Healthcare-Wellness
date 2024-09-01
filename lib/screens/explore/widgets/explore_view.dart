@@ -17,6 +17,8 @@ class ExploreView extends StatefulWidget {
 }
 
 class _ExploreViewState extends State<ExploreView> {
+  String? _selectedCategory;
+
   @override
   void initState() {
     super.initState();
@@ -104,20 +106,38 @@ class _ExploreViewState extends State<ExploreView> {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           final category = categories[index];
+          final isSelected = _selectedCategory == category.text;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Chip(
-              avatar: Icon(category.icon, color: Colors.white),
+            child: ChoiceChip(
+              avatar: Icon(
+                category.icon,
+                color: Colors.white,
+              ),
               label: Text(category.text),
               backgroundColor: Colors.grey[900],
               labelStyle: const TextStyle(
                 color: Colors.white,
               ),
+              selected: isSelected,
+              onSelected: (selected) {
+                setState(() {
+                  _selectedCategory = selected ? category.text : null;
+                });
+                if (selected) {
+                  _fetchNewsByCategory(category.text);
+                }
+              },
+              selectedColor: Colors.blue,
             ),
           );
         },
       ),
     );
+  }
+  void _fetchNewsByCategory(String category) {
+    final exploreBloc = BlocProvider.of<ExploreBloc>(context);
+    exploreBloc.add(FetchNewsByCategory(category: category));
   }
 
   Widget _buildSectionHeader(String title) {

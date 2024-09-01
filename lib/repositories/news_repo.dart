@@ -58,4 +58,20 @@ class NewsRepository {
       throw Exception('Failed to fetch recommended news: $e');
     }
   }
+  Future<List<Article>> fetchNewsByCategory(category) async {
+    try {
+      final response = await dio.get(
+        '/v2/everything',
+        queryParameters: {
+          'q': category,
+          'apiKey': API_KEY,
+          'from': TimeOfDay.now().toString(),
+        },
+      );
+      final newsResponse = NewsResponseModel.fromJson(response.data);
+      return newsResponse.articles ?? [];
+    } catch (e) {
+      throw Exception('Failed to fetch recommended news: $e');
+    }
+  }
 }

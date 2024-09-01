@@ -9,5 +9,13 @@
 abstract class ExploreEvent {}
 
 class FetchRecentNews extends ExploreEvent {}
+class FetchNewsByCategory extends ExploreEvent {
+  final String category;
+
+  FetchNewsByCategory({required this.category});
+
+  @override
+  List<Object> get props => [category];
+}
 
 // class FetchRecommended extends ExploreEvent {}

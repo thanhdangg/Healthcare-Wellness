@@ -9,6 +9,8 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
 
   ExploreBloc({required this.newsRepository}) : super(ExploreInitial()) {
     on<FetchRecentNews>(_onFetchRecentNews);
+    on<FetchNewsByCategory>(_onFetchNewsByCategory);
+
     // on<FetchRecommended>(_onFetchRecommended);
   }
 
@@ -23,6 +25,17 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
       emit(ExploreError(e.toString()));
     }
   }
+  Future<void> _onFetchNewsByCategory(
+      FetchNewsByCategory event, Emitter<ExploreState> emit) async {
+    emit(ExploreLoading());
+    try {
+      final newsByCategory = await newsRepository.fetchNewsByCategory(event.category);
+      emit(ExploreLoaded(recentNews: newsByCategory, recommended: []));
+    } catch (e) {
+      emit(ExploreError(e.toString()));
+    }
+  }
+        
 
   // Future<void> _onFetchRecommended(
   //     FetchRecommended event, Emitter<ExploreState> emit) async {
