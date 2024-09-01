@@ -1,22 +1,23 @@
 part of 'home_bloc.dart';
+
 class HomeState {
   final BlocStateStatus status;
-  final List<DeviceModel>? devices;
+  final List<Article>? articleList;
 
-  HomeState({required this.status, this.devices});
+  HomeState({required this.status, this.articleList});
 
   factory HomeState.initial() => HomeState(
         status: BlocStateStatus.initial,
-        devices: [],
+        articleList: [],
       );
 
   HomeState copyWith({
     BlocStateStatus? status,
-    List<DeviceModel>? devices,
+    List<Article>? articleList,
   }) {
     return HomeState(
       status: status ?? this.status,
-      devices: devices ?? this.devices,
+      articleList: articleList ?? this.articleList,
     );
   }
 }
