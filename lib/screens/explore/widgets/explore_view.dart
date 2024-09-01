@@ -5,6 +5,7 @@ import 'package:healthcare_wellness/screens/explore/bloc/explore_bloc.dart';
 import 'package:healthcare_wellness/screens/explore/bloc/explore_event.dart';
 import 'package:healthcare_wellness/screens/explore/bloc/explore_state.dart';
 import 'package:healthcare_wellness/screens/explore/widgets/category.dart';
+import 'package:healthcare_wellness/screens/news_detail/news_detail_page.dart';
 
 class ExploreView extends StatefulWidget {
   // final ExploreState state;
@@ -23,7 +24,7 @@ class _ExploreViewState extends State<ExploreView> {
     exploreBloc.add(FetchRecentNews());
     // exploreBloc.add(FetchRecommended());
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,74 +202,84 @@ class _ExploreViewState extends State<ExploreView> {
   }
 
   Widget _buildNewsCard(Article article) {
-    return Card(
-      color: Colors.grey[900],
-      child: SizedBox(
-        width: 180.0,
-        height: 230.0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: article.urlToImage != null
-                  ? Image.network(
-                      article.urlToImage!,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      errorBuilder: (context, error, stackTrace) => Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewsDetailPage(article: article),
+          ),
+        );
+      },
+      child: Card(
+        color: Colors.grey[900],
+        child: SizedBox(
+          width: 180.0,
+          height: 230.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: article.urlToImage != null
+                    ? Image.network(
+                        article.urlToImage!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey,
+                        ),
+                      )
+                    : Container(color: Colors.grey),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      article.author ?? '',
+                      style: const TextStyle(
                         color: Colors.grey,
+                        fontSize: 12.0,
                       ),
-                    )
-                  : Container(color: Colors.grey),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    article.author ?? '',
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.0,
                     ),
-                  ),
-                  const SizedBox(height: 4.0),
-                  Text(
-                    article.title ?? '',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
+                    const SizedBox(height: 4.0),
+                    Text(
+                      article.title ?? '',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          article.publishedAt ?? '',
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.0,
+                    const SizedBox(height: 4.0),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            article.publishedAt ?? '',
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12.0,
+                            ),
                           ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.bookmark_border,
-                          color: Colors.white,
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.bookmark_border,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
