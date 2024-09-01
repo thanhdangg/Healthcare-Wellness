@@ -3,36 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:healthcare_wellness/models/news/news_response_model.dart';
 
 @RoutePage()
-class NewsDetailPage extends StatefulWidget {
+class DetailPage extends StatelessWidget {
   final Article article;
-  const NewsDetailPage({super.key, required this.article});
-
-  @override
-  State<NewsDetailPage> createState() => _NewsDetailPageState();
-}
-
-class _NewsDetailPageState extends State<NewsDetailPage> {
-  @override
-  Widget build(BuildContext context) {
-    return NewsDetailView(article: widget.article); 
-  }
-}
-
-class NewsDetailView extends StatefulWidget {
-  final Article article;
-
-  const NewsDetailView({super.key, required this.article}); 
-
-  @override
-  State<NewsDetailView> createState() => _NewsDetailViewState();
-}
-
-class _NewsDetailViewState extends State<NewsDetailView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  const DetailPage(this.article, {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,13 +13,10 @@ class _NewsDetailViewState extends State<NewsDetailView> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () {},
           icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.white,
-            
           ),
         ),
         actions: [
@@ -76,7 +46,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
       body: Column(
         children: [
           Image.network(
-            widget.article.urlToImage ?? '',
+            article.urlToImage ?? '',
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -105,9 +75,9 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                       size: 12.0,
                       color: Color.fromARGB(255, 222, 160, 233),
                     ),
-                    SizedBox(width: 4.0),
+                    const SizedBox(width: 4.0),
                     Text(
-                      widget.article.source?.name ?? '',
+                      article.source?.name ?? '',
                       style: const TextStyle(
                         fontSize: 12.0,
                         color: Color.fromARGB(255, 222, 160, 233),
@@ -118,7 +88,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                 ),
                 const SizedBox(height: 8.0),
                 Text(
-                  widget.article.title ?? '',
+                  article.title ?? '',
                   style: const TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
@@ -127,7 +97,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                 ),
                 const SizedBox(height: 8.0),
                 Text(
-                  widget.article.author ?? '',
+                  article.author ?? '',
                   style: const TextStyle(
                     fontSize: 14.0,
                     color: Colors.white,
@@ -135,7 +105,7 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                 ),
                 const SizedBox(height: 8.0),
                 Text(
-                  widget.article.publishedAt ?? '',
+                  article.publishedAt ?? '',
                   style: const TextStyle(
                     fontSize: 12.0,
                     color: Colors.white,
@@ -170,14 +140,14 @@ class _NewsDetailViewState extends State<NewsDetailView> {
                   ],
                 ),
                 Text(
-                  widget.article.description ?? '',
+                  article.description ?? '',
                   style: const TextStyle(
                     fontSize: 14.0,
                     color: Colors.white,
                   ),
                 ),
                 Text(
-                  widget.article.content ?? '',
+                  article.content ?? '',
                   style: const TextStyle(
                     fontSize: 14.0,
                     color: Colors.white,

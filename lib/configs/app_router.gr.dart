@@ -22,7 +22,8 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     HomeRoute.name: (routeData) {
-      final args = routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
+      final args =
+          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: HomePage(
@@ -169,7 +170,8 @@ class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
 
   static const String name = 'NewsDetailRoute';
 
-  static const PageInfo<NewsDetailRouteArgs> page = PageInfo<NewsDetailRouteArgs>(name);
+  static const PageInfo<NewsDetailRouteArgs> page =
+      PageInfo<NewsDetailRouteArgs>(name);
 }
 
 class NewsDetailRouteArgs {

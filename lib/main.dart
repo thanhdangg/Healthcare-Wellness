@@ -3,10 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/configs/locator.dart';
-import 'package:healthcare_wellness/repositories/device_repo.dart';
 import 'package:healthcare_wellness/repositories/news_repo.dart';
+import 'package:healthcare_wellness/screens/explore/bloc/explore_bloc.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
-import 'package:healthcare_wellness/screens/sign_up/bloc/sign_up_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,6 +64,7 @@ class _MyAppState extends State<MyApp> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<HomeBloc>(create: (context) => HomeBloc(context: context)),
+          BlocProvider<ExploreBloc>(create: (context) => ExploreBloc(newsRepository: NewsRepository())), 
         ],
         child: MaterialApp.router(
           title: "My App",

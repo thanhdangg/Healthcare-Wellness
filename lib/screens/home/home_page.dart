@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/configs/app_router.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 import 'package:healthcare_wellness/screens/home/widgets/item_news.dart';
 import 'package:healthcare_wellness/utils/enums.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -85,7 +85,8 @@ class _HomePageState extends State<HomePage> {
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
-            if (state.status == BlocStateStatus.loading && state.articleList == null) {
+            if (state.status == BlocStateStatus.loading &&
+                state.articleList == null) {
               return const Center();
             }
             return SizedBox(
@@ -123,15 +124,18 @@ class _HomePageState extends State<HomePage> {
                     // top stories content
                     ListView.separated(
                       shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 16.0),
                       controller: _scrollController,
-                      separatorBuilder: (context, index) => const SizedBox(height: 12.0),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 12.0),
                       itemBuilder: (context, index) {
                         final article = state.articleList?[index];
                         return ItemNews(
                           article: article!,
                           onTapItem: (article) {
-                            context.router.push(NewsDetailRoute(article: article));
+                            context.router
+                                .push(NewsDetailRoute(article: article));
                           },
                         );
                       },
@@ -148,80 +152,134 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildCarouselPage(HomeState state) {
-    final highlightItem =
-        state.articleList == null || state.articleList!.isEmpty ? null : state.articleList!.first;
+    final highlightItems = state.articleList ?? [];
+
+    final pageController = PageController();
+
     return Container(
+      height: 180,
+      margin: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      height: 180,
-      margin: const EdgeInsets.all(16.0),
-      child: highlightItem == null
+      child: highlightItems.isEmpty
           ? const SizedBox.expand()
           : Stack(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.center,
               children: [
-                // media
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    width: double.infinity,
-                    height: double.infinity,
-                    highlightItem.urlToImage ?? '',
-                    fit: BoxFit.cover,
-                  ),
+                PageView.builder(
+                  controller: pageController,
+                  // itemCount: highlightItems.length,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    final item = highlightItems[index];
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Stack(
+                        children: [
+                          Image.network(
+                            item.urlToImage ?? '',
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                width: double.infinity,
+                                height: double.infinity,
+                                color: Colors.grey,
+                                child: const Icon(
+                                  Icons.error,
+                                  color: Colors.white,
+                                ),
+                              );
+                            },
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: <Color>[
+                                  Colors.black.withOpacity(0.95),
+                                  Colors.black.withOpacity(0.5),
+                                  Colors.transparent,
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          item.author ?? '',
+                                          maxLines: 1,
+                                          style: const TextStyle(
+                                              fontSize: 10.0,
+                                              fontWeight: FontWeight.normal,
+                                              color: Color(0xffe8e8e8)),
+                                        ),
+                                        const SizedBox(height: 4.0),
+                                        Text(
+                                          item.title ?? '',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8.0),
+                                  IconButton(
+                                    onPressed: ()  {
+                                      context.router.push(NewsDetailRoute(article: item));
+                                    },
+                                    icon: const Icon(
+                                      Icons.open_in_new,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
                 ),
-                // overlay foreground
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: <Color>[
-                        Colors.black.withOpacity(0.95),
-                        Colors.black.withOpacity(0.5),
-                        Colors.transparent,
-                      ], // Gradient from
+                Positioned(
+                  top: 8.0,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: SmoothPageIndicator(
+                      controller: pageController,
+                      // count: highlightItems.length,
+                      count: 5,
+                      effect: const ExpandingDotsEffect(
+                        dotHeight: 8.0,
+                        dotWidth: 8.0,
+                        activeDotColor: Colors.white,
+                        dotColor: Colors.grey,
+                      ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              highlightItem.author ?? '',
-                              maxLines: 1,
-                              style: const TextStyle(
-                                  fontSize: 10.0,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color(0xffe8e8e8e)),
-                            ),
-                            const SizedBox(height: 4.0),
-                            Text(
-                              highlightItem.title ?? '',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.white),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 8.0),
-                      const Icon(
-                        Icons.open_in_new,
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
-                )
               ],
             ),
     );

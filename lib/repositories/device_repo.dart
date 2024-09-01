@@ -12,4 +12,5 @@ class DeviceRepository {
       return null;
     }
   }
+  
 }
