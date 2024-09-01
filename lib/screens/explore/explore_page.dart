@@ -24,7 +24,7 @@ class _ExplorePageState extends State<ExplorePage> {
     final newsRepository = NewsRepository();
     _exploreBloc = ExploreBloc(newsRepository: newsRepository);
     _exploreBloc.add(FetchRecentNews());
-    _exploreBloc.add(FetchRecommended());
+    // _exploreBloc.add(FetchRecommended());
   }
 
   @override

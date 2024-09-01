@@ -9,7 +9,7 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
 
   ExploreBloc({required this.newsRepository}) : super(ExploreInitial()) {
     on<FetchRecentNews>(_onFetchRecentNews);
-    on<FetchRecommended>(_onFetchRecommended);
+    // on<FetchRecommended>(_onFetchRecommended);
   }
 
   Future<void> _onFetchRecentNews(
@@ -17,20 +17,21 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
     try {
       emit(ExploreLoading());
       final recentNews = await newsRepository.fetchRecentNews();
-      emit(ExploreLoaded(recentNews: recentNews, recommended: const []));
+      final recommended = await newsRepository.fetchRecommended();
+      emit(ExploreLoaded(recentNews: recentNews, recommended: recommended));
     } catch (e) {
       emit(ExploreError(e.toString()));
     }
   }
 
-  Future<void> _onFetchRecommended(
-      FetchRecommended event, Emitter<ExploreState> emit) async {
-    try {
-      emit(ExploreLoading());
-      final recommended = await newsRepository.fetchRecommended();
-      emit(ExploreLoaded(recentNews: const [], recommended: recommended));
-    } catch (e) {
-      emit(ExploreError(e.toString()));
-    }
-  }
+  // Future<void> _onFetchRecommended(
+  //     FetchRecommended event, Emitter<ExploreState> emit) async {
+  //   try {
+  //     emit(ExploreLoading());
+  //     final recommended = await newsRepository.fetchRecommended();
+  //     emit(ExploreLoaded(recentNews: const [], recommended: recommended));
+  //   } catch (e) {
+  //     emit(ExploreError(e.toString()));
+  //   }
+  // }
 }

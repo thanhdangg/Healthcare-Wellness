@@ -21,7 +21,7 @@ class _ExploreViewState extends State<ExploreView> {
     super.initState();
     final exploreBloc = BlocProvider.of<ExploreBloc>(context);
     exploreBloc.add(FetchRecentNews());
-    exploreBloc.add(FetchRecommended());
+    // exploreBloc.add(FetchRecommended());
   }
   
   @override

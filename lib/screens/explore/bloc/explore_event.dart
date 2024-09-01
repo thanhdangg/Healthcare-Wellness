@@ -10,4 +10,4 @@ abstract class ExploreEvent {}
 
 class FetchRecentNews extends ExploreEvent {}
 
-class FetchRecommended extends ExploreEvent {}
+// class FetchRecommended extends ExploreEvent {}
