@@ -20,9 +20,9 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SplashRoute.page),
         AutoRoute(page: WelcomeRoute.page),
         AutoRoute(page: SignInRoute.page),
-        AutoRoute(page: SignUpRoute.page, initial: true),
+        AutoRoute(page: SignUpRoute.page),
         AutoRoute(page: NewsDetailRoute.page),
-        AutoRoute(page: MainTabbarRoute.page, children: [
+        AutoRoute(page: MainTabbarRoute.page, initial: true, children: [
           AutoRoute(page: HomeRoute.page),
           AutoRoute(page: ExploreRoute.page),
           AutoRoute(page: SavedRoute.page),

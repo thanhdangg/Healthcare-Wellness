@@ -7,7 +7,7 @@ import 'package:healthcare_wellness/repositories/news_repo.dart';
 import 'package:healthcare_wellness/screens/explore/bloc/explore_bloc.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -16,7 +16,7 @@ void main() {
       // transparent status bar
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: Colors.black));
   setupLocator();
   runApp(const MyApp());
@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<HomeBloc>(create: (context) => HomeBloc(context: context)),
-          BlocProvider<ExploreBloc>(create: (context) => ExploreBloc(newsRepository: NewsRepository())), 
+          BlocProvider<ExploreBloc>(create: (context) => ExploreBloc(context: context)),
         ],
         child: MaterialApp.router(
           title: "My App",

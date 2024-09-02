@@ -46,19 +46,22 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
           ),
           backgroundColor: Colors.black,
-          actions: const [
+          actions: [
             // search
             SizedBox(
               width: 44.0,
               height: 44.0,
-              child: Icon(
-                Icons.search_outlined,
+              child: IconButton(
+                onPressed: () {
+                  context.tabsRouter.setActiveIndex(1);
+                },
+                icon: const Icon(Icons.search_outlined),
                 color: Colors.white,
-                size: 24,
+                iconSize: 24,
               ),
             ),
             // notification
-            SizedBox(
+            const SizedBox(
               width: 44.0,
               height: 44.0,
               child: Icon(
@@ -68,7 +71,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             // avatar
-            SizedBox(
+            const SizedBox(
               width: 44.0,
               height: 44.0,
               child: Center(
@@ -80,13 +83,12 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             // Spacing right
-            SizedBox(width: 8.0)
+            const SizedBox(width: 8.0)
           ],
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
-            if (state.status == BlocStateStatus.loading &&
-                state.articleList == null) {
+            if (state.status == BlocStateStatus.loading && state.articleList == null) {
               return const Center();
             }
             return SizedBox(
@@ -124,18 +126,15 @@ class _HomePageState extends State<HomePage> {
                     // top stories content
                     ListView.separated(
                       shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                       controller: _scrollController,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 12.0),
+                      separatorBuilder: (context, index) => const SizedBox(height: 12.0),
                       itemBuilder: (context, index) {
                         final article = state.articleList?[index];
                         return ItemNews(
                           article: article!,
                           onTapItem: (article) {
-                            context.router
-                                .push(NewsDetailRoute(article: article));
+                            context.router.push(NewsDetailRoute(article: article));
                           },
                         );
                       },
@@ -218,8 +217,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
@@ -245,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   const SizedBox(width: 8.0),
                                   IconButton(
-                                    onPressed: ()  {
+                                    onPressed: () {
                                       context.router.push(NewsDetailRoute(article: item));
                                     },
                                     icon: const Icon(

@@ -1,41 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthcare_wellness/models/news/news_response_model.dart';
 import 'package:healthcare_wellness/repositories/news_repo.dart';
-import 'explore_event.dart';
-import 'explore_state.dart';
+import 'package:healthcare_wellness/utils/enums.dart';
+part 'explore_event.dart';
+part 'explore_state.dart';
 
 class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
-  final NewsRepository newsRepository;
+  final BuildContext context;
 
-  ExploreBloc({required this.newsRepository}) : super(ExploreInitial()) {
+  ExploreBloc({required this.context}) : super(ExploreState.initial()) {
     on<FetchRecentNews>(_onFetchRecentNews);
     on<FetchNewsByCategory>(_onFetchNewsByCategory);
 
     // on<FetchRecommended>(_onFetchRecommended);
   }
 
-  Future<void> _onFetchRecentNews(
-      FetchRecentNews event, Emitter<ExploreState> emit) async {
+  Future<void> _onFetchRecentNews(FetchRecentNews event, Emitter<ExploreState> emit) async {
+    final newsRepository = RepositoryProvider.of<NewsRepository>(context);
     try {
-      emit(ExploreLoading());
+      emit(ExploreState.loading());
       final recentNews = await newsRepository.fetchRecentNews();
       final recommended = await newsRepository.fetchRecommended();
-      emit(ExploreLoaded(recentNews: recentNews, recommended: recommended));
+      emit(state.copyWith(
+        status: BlocStateStatus.success,
+        recentNews: recentNews,
+        recommended: recommended,
+      ));
     } catch (e) {
-      emit(ExploreError(e.toString()));
+      emit(state.copyWith(status: BlocStateStatus.failed, errorMessage: e.toString()));
     }
   }
-  Future<void> _onFetchNewsByCategory(
-      FetchNewsByCategory event, Emitter<ExploreState> emit) async {
-    emit(ExploreLoading());
+
+  Future<void> _onFetchNewsByCategory(FetchNewsByCategory event, Emitter<ExploreState> emit) async {
+    final newsRepository = RepositoryProvider.of<NewsRepository>(context);
+    emit(ExploreState.loading());
     try {
       final newsByCategory = await newsRepository.fetchNewsByCategory(event.category);
-      emit(ExploreLoaded(recentNews: newsByCategory, recommended: []));
+      emit(
+        state.copyWith(
+          status: BlocStateStatus.success,
+          recentNews: newsByCategory,
+          recommended: [],
+        ),
+      );
     } catch (e) {
-      emit(ExploreError(e.toString()));
+      emit(state.copyWith(status: BlocStateStatus.failed, errorMessage: e.toString()));
     }
   }
-        
 
   // Future<void> _onFetchRecommended(
   //     FetchRecommended event, Emitter<ExploreState> emit) async {
