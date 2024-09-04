@@ -1,38 +1,36 @@
-part of 'explore_bloc.dart';
+// import 'package:equatable/equatable.dart';
+import 'package:healthcare_wellness/models/news/news_response_model.dart';
 
-class ExploreState {
-  final BlocStateStatus status;
-  final List<Article>? recentNews;
-  final List<Article>? recommended;
-  final String? errorMessage;
+// abstract class ExploreState extends Equatable {
+//   const ExploreState();
 
-  ExploreState({
-    required this.status,
-    this.recentNews,
-    this.recommended,
-    this.errorMessage,
+//   @override
+//   List<Object?> get props => [];
+// }
+abstract class ExploreState {}
+
+class ExploreInitial extends ExploreState {}
+
+class ExploreLoading extends ExploreState {}
+
+class ExploreLoaded extends ExploreState {
+  final List<Article> recentNews;
+  final List<Article> recommended;
+
+  ExploreLoaded({
+    required this.recentNews,
+    required this.recommended,
   });
-  factory ExploreState.initial() => ExploreState(
-        status: BlocStateStatus.initial,
-        recentNews: null,
-        recommended: null,
-      );
-  factory ExploreState.loading() => ExploreState(
-        status: BlocStateStatus.loading,
-        recentNews: null,
-        recommended: null,
-      );
-  ExploreState copyWith({
-    BlocStateStatus? status,
-    List<Article>? recentNews,
-    List<Article>? recommended,
-    String? errorMessage,
-  }) {
-    return ExploreState(
-      status: status ?? this.status,
-      recentNews: recentNews ?? this.recentNews,
-      recommended: recommended ?? this.recommended,
-      errorMessage: errorMessage,
-    );
-  }
+
+  @override
+  List<Object?> get props => [recentNews, recommended];
+}
+
+class ExploreError extends ExploreState {
+  final String message;
+
+  ExploreError(this.message);
+
+  // @override
+  // List<Object?> get props => [message];
 }
