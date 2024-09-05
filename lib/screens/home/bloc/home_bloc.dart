@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +7,7 @@ import 'package:healthcare_wellness/configs/locator.dart';
 import 'package:healthcare_wellness/models/db/article.dart' as db;
 import 'package:healthcare_wellness/models/news/news_response_model.dart';
 import 'package:healthcare_wellness/repositories/news_repo.dart';
+import 'package:healthcare_wellness/screens/saved/bloc/saved_bloc.dart';
 import 'package:healthcare_wellness/utils/enums.dart';
 
 part 'home_event.dart';
@@ -25,6 +28,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final dataSaved = await articleProvider.insert(article);
 
     if (dataSaved.id != null) {
+      // save success
+      BlocProvider.of<SavedBloc>(context).add(UpdateSavedArticlesDB());
       emit(state.copyWith(toastStatus: ToastStateStatus.success));
     } else {
       emit(state.copyWith(toastStatus: ToastStateStatus.failed));

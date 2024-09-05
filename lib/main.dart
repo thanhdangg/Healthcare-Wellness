@@ -6,6 +6,7 @@ import 'package:healthcare_wellness/configs/locator.dart';
 import 'package:healthcare_wellness/repositories/news_repo.dart';
 import 'package:healthcare_wellness/screens/explore/bloc/explore_bloc.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
+import 'package:healthcare_wellness/screens/saved/bloc/saved_bloc.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -52,7 +53,10 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<HomeBloc>(create: (context) => HomeBloc(context: context)),
+          BlocProvider<SavedBloc>(create: (context) => SavedBloc(context: context)),
+          BlocProvider<HomeBloc>(
+            create: (context) => HomeBloc(context: context)
+          ),
           BlocProvider<ExploreBloc>(create: (context) => ExploreBloc(context: context)),
         ],
         child: MaterialApp.router(
