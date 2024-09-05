@@ -86,7 +86,15 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(width: 8.0)
           ],
         ),
-        body: BlocBuilder<HomeBloc, HomeState>(
+        body: BlocConsumer<HomeBloc, HomeState>(
+          listener: (context, state) {
+            if (state.toastStatus != null) {
+              final snackBar = SnackBar(
+                content: Text('${state.toastStatus?.message}'),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          },
           builder: (context, state) {
             if (state.status == BlocStateStatus.loading && state.articleList == null) {
               return const Center();
@@ -135,6 +143,9 @@ class _HomePageState extends State<HomePage> {
                           article: article!,
                           onTapItem: (article) {
                             context.router.push(NewsDetailRoute(article: article));
+                          },
+                          onBookmarkItem: (article) async {
+                            _homeBloc.add(SaveArticleToDB(article: article));
                           },
                         );
                       },

@@ -6,6 +6,8 @@ import 'package:healthcare_wellness/configs/locator.dart';
 import 'package:healthcare_wellness/repositories/news_repo.dart';
 import 'package:healthcare_wellness/screens/explore/bloc/explore_bloc.dart';
 import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,25 +21,12 @@ void main() async {
       systemNavigationBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: Colors.black));
   setupLocator();
+  articleProvider.open(join(await getDatabasesPath(), 'app.db'));
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
-  // Future<Widget> getLandingPage() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
-
-  //   if (isFirstTime) {
-  //     prefs.setBool('isFirstTime', false);
-  //     return const SplashPage();
-  //   } else {
-  //     return const HomePage(
-  //       title: "Home Page",
-  //     );
-  //   }
-  // }
 
   @override
   State<MyApp> createState() => _MyAppState();

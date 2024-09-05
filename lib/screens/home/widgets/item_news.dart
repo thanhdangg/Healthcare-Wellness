@@ -4,10 +4,12 @@ import 'package:healthcare_wellness/models/news/news_response_model.dart';
 class ItemNews extends StatefulWidget {
   final Article article;
   final Function(Article) onTapItem;
+  final Function(Article)? onBookmarkItem;
   const ItemNews({
     super.key,
     required this.article,
     required this.onTapItem,
+    this.onBookmarkItem,
   });
 
   @override
@@ -78,9 +80,14 @@ class _ItemNewsState extends State<ItemNews> {
                   style: const TextStyle(fontSize: 10, color: Color(0xFF888888)),
                 ),
                 const Spacer(),
-                const Icon(
-                  Icons.bookmark_border,
-                  color: Color(0xff888888),
+                IconButton(
+                  icon: const Icon(
+                    Icons.bookmark_border,
+                    color: Color(0xff888888),
+                  ),
+                  onPressed: () {
+                    widget.onBookmarkItem?.call(widget.article);
+                  },
                 ),
                 const SizedBox(width: 12.0),
                 const Icon(
