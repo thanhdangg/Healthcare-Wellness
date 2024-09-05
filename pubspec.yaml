@@ -28,6 +28,8 @@ dependencies:
   get_it: ^7.7.0
   smooth_page_indicator: ^1.2.0+3
   equatable: ^2.0.0
+  sqflite: ^2.3.3+1
+  path: ^1.9.0
 
   
 
