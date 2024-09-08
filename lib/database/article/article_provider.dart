@@ -15,7 +15,10 @@ class ArticleProvider {
         create table $tableArticles ( 
         $columnId integer primary key autoincrement, 
         $columnTitle text not null,
-        $columnDescription text not null)
+        $columnDescription text not null,
+        $columnUrlToImage text not null, 
+        $columnPublishedAt text not null
+        )
         ''');
       },
     );
@@ -26,21 +29,30 @@ class ArticleProvider {
     return article;
   }
 
-  Future<Article?> getArticle(int id) async {
-    final List<Map> maps = await db.query(tableArticles,
-        columns: [columnId, columnTitle, columnTitle], where: '$columnId = ?', whereArgs: [id]);
-    if (maps.isNotEmpty) {
-      return Article.fromMap(maps.first);
-    }
-    return null;
-  }
+  // Future<Article?> getArticle(int id) async {
+  //   final List<Map> maps = await db.query(tableArticles,
+  //       columns: [columnId, columnTitle, columnDescription, columnUrlToImage, columnPublishedAt], where: '$columnId = ?', whereArgs: [id]);
+  //   if (maps.isNotEmpty) {
+  //     return Article.fromMap(maps.first);
+  //   }
+  //   return null;
+  // }
 
-  Future<List<Article?>> getAllArticles() async {
-    final List<Map> maps = await db.rawQuery('SELECT * FROM $tableArticles');
-    if (maps.isNotEmpty) {
-      return maps.map((e) => Article.fromMap(e)).toList();
+  // Future<List<Article?>> getAllArticles() async {
+  //   final List<Map> maps = await db.rawQuery('SELECT * FROM $tableArticles');
+  //   if (maps.isNotEmpty) {
+  //     return maps.map((e) => Article.fromMap(e)).toList();
+  //   }
+  //   return [];
+  // }
+  Future<List<Article>> getAllArticles() async {
+    final List<Map<String, dynamic>> maps = await db.query(tableArticles);
+
+    if (maps.isEmpty) {
+      return [];
     }
-    return [];
+
+    return List<Article>.from(maps.map((map) => Article.fromMap(map)));
   }
 
   Future<int> delete(int id) async {

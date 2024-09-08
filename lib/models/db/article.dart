@@ -12,15 +12,42 @@ const String columnTitle = 'title';
 /// done column description
 const String columnDescription = 'description';
 
-class Article {
-  Article(this.title, this.description);
+const String columnUrlToImage = 'urlToImage';
 
-  /// Read from a record.
-  Article.fromMap(Map map) {
-    id = map[columnId] as int?;
-    title = map[columnTitle] as String?;
-    description = map[columnDescription] as String?;
+const String columnPublishedAt = 'publishedAt';
+
+class Article {
+  
+  Article({
+    required this.title,
+    required this.description,
+    required this.urlToImage,
+    required this.publishedAt,
+  });
+  factory Article.fromMap(Map<String, dynamic> map) {
+  return Article(
+    title: map['title'] as String? ?? '',
+    description: map['description'] as String? ?? '',
+    urlToImage: map['urlToImage'] as String? ?? '',
+    publishedAt: map['publishedAt'] as String? ?? '',
+  );
+}
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'description': description,
+      'urlToImage': urlToImage,
+      'publishedAt': publishedAt,
+    };
   }
+    /// Read from a record.
+  // Article.fromMap(Map map) {
+  //   id = map[columnId] as int?;
+  //   title = map[columnTitle] as String?;
+  //   description = map[columnDescription] as String?;
+  //   publishedAt = map[publishedAt] as String?;
+  //   urlToImage = map[urlToImage] as String?;
+  // }
 
   /// id.
   int? id;
@@ -31,13 +58,23 @@ class Article {
   /// description.
   String? description;
 
+  /// publishedAt.
+  String? publishedAt;
+
+  /// urlToImage.
+  String? urlToImage;
 
   /// Convert to a record.
-  Map<String, Object?> toMap() {
-    final map = <String, Object?>{columnTitle: title, columnDescription: description};
-    if (id != null) {
-      map[columnId] = id;
-    }
-    return map;
-  }
+  // Map<String, Object?> toMap() {
+  //   final map = <String, Object?>{
+  //     columnTitle: title,
+  //     columnDescription: description,
+  //     columnUrlToImage: urlToImage,
+  //     columnPublishedAt: publishedAt
+  //   };
+  //   if (id != null) {
+  //     map[columnId] = id;
+  //   }
+  //   return map;
+  // }
 }

@@ -22,7 +22,7 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
     final data = await articleProvider.getAllArticles();
     // mapping Model DB -> Model Article UI
     final savedArticleList =
-        data.reversed.map((e) => Article(title: e?.title, description: e?.description)).toList();
+        data.reversed.map((e) => Article(title: e?.title, description: e?.description, urlToImage: e?.urlToImage,publishedAt: e?.publishedAt)).toList();
     // Emit state
     emit(state.copyWith(status: BlocStateStatus.success, savedArticleList: savedArticleList));
   }
@@ -32,7 +32,7 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
     final data = await articleProvider.getAllArticles();
     // mapping Model DB -> Model Article UI
     final savedArticleList =
-        data.reversed.map((e) => Article(title: e?.title, description: e?.description)).toList();
+        data.reversed.map((e) => Article(title: e?.title, description: e?.description, urlToImage: e?.urlToImage, publishedAt: e?.publishedAt)).toList();
     // Emit state
     emit(state.copyWith(status: BlocStateStatus.success, savedArticleList: savedArticleList));
   }

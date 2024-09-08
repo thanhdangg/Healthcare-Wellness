@@ -1,7 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthcare_wellness/configs/locator.dart';
+import 'package:healthcare_wellness/database/article/article_provider.dart';
 import 'package:healthcare_wellness/models/news/news_response_model.dart';
+import 'package:healthcare_wellness/models/db/article.dart' as db;
 import 'package:healthcare_wellness/repositories/news_repo.dart';
+import 'package:healthcare_wellness/screens/saved/bloc/saved_bloc.dart';
 import 'package:healthcare_wellness/utils/enums.dart';
 part 'explore_event.dart';
 part 'explore_state.dart';
@@ -12,8 +18,28 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
   ExploreBloc({required this.context}) : super(ExploreState.initial()) {
     on<FetchRecentNews>(_onFetchRecentNews);
     on<FetchNewsByCategory>(_onFetchNewsByCategory);
+    on<SaveArticleExploreToDB>(_onSaveArticleToDB);
 
     // on<FetchRecommended>(_onFetchRecommended);
+  }
+  FutureOr<void> _onSaveArticleToDB(SaveArticleExploreToDB event, Emitter<ExploreState> emit) async {
+    // convert article -> DB Article
+    final article = db.Article(
+      title: event.article.title,
+      description: event.article.description,
+      urlToImage: event.article.urlToImage,
+      publishedAt: event.article.publishedAt,
+    );
+    // save to db
+    final dataSaved = await articleProvider.insert(article);
+
+    if (dataSaved.id != null) {
+      // save success
+      BlocProvider.of<SavedBloc>(context).add(UpdateSavedArticlesDB());
+      emit(state.copyWith(toastStatus: ToastStateStatus.success));
+    } else {
+      emit(state.copyWith(toastStatus: ToastStateStatus.failed));
+    }
   }
 
   Future<void> _onFetchRecentNews(FetchRecentNews event, Emitter<ExploreState> emit) async {

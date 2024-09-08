@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthcare_wellness/models/news/news_response_model.dart';
 import 'package:healthcare_wellness/screens/explore/bloc/explore_bloc.dart';
 import 'package:healthcare_wellness/screens/explore/widgets/category.dart';
+import 'package:healthcare_wellness/screens/explore/widgets/item_eplore.dart';
+import 'package:healthcare_wellness/screens/home/bloc/home_bloc.dart';
 import 'package:healthcare_wellness/screens/news_detail/news_detail_page.dart';
 import 'package:healthcare_wellness/utils/enums.dart';
 
@@ -196,7 +198,22 @@ class _ExploreViewState extends State<ExploreView> {
               itemCount: recentNews?.length,
               itemBuilder: (context, index) {
                 final article = recentNews![index];
-                return _buildNewsCard(article);
+                return ItemExplore(
+                  article: article,
+                  onTapItem: (article) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewsDetailPage(
+                          article: article,
+                        ),
+                      ),
+                    );
+                  },
+                  onBookmarkItem: (article) async{
+                    _exploreBloc.add(SaveArticleExploreToDB(article: article));
+                  },
+                );
               },
             ),
           );
@@ -226,96 +243,27 @@ class _ExploreViewState extends State<ExploreView> {
           itemCount: recommended?.length,
           itemBuilder: (context, index) {
             final article = recommended![index];
-            return _buildNewsCard(article);
+            return ItemExplore(
+              article: article,
+              onTapItem: (article) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewsDetailPage(
+                      article: article,
+                    ),
+                  ),
+                );
+              },
+              onBookmarkItem: (article) {
+
+              },
+            );
           },
         ),
       );
     } else {
       return const Center(child: Text('Unknown state'));
     }
-  }
-
-  Widget _buildNewsCard(Article article) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NewsDetailPage(article: article),
-          ),
-        );
-      },
-      child: Card(
-        color: Colors.grey[900],
-        child: SizedBox(
-          width: 180.0,
-          height: 230.0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: article.urlToImage != null
-                    ? Image.network(
-                        article.urlToImage!,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        errorBuilder: (context, error, stackTrace) => Container(
-                          color: Colors.grey,
-                        ),
-                      )
-                    : Container(color: Colors.grey),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      article.author ?? '',
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    const SizedBox(height: 4.0),
-                    Text(
-                      article.title ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            article.publishedAt ?? '',
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12.0,
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.bookmark_border,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

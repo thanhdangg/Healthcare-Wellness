@@ -23,8 +23,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> _onSaveArticleToDB(SaveArticleToDB event, Emitter<HomeState> emit) async {
     // convert article -> DB Article
-    final article = db.Article(event.article.title, event.article.description);
-    // save to db
+
+  final article = db.Article(
+    title: event.article.title,
+    description: event.article.description,
+    urlToImage: event.article.urlToImage,
+    publishedAt: event.article.publishedAt,
+  );    // save to db
     final dataSaved = await articleProvider.insert(article);
 
     if (dataSaved.id != null) {
